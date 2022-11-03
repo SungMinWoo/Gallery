@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block script %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block body %}
+
+<div class="login-structure">
+    <div class="login-wrapper">
+        <h2>로그인</h2>
+        <form method="post" id="account-form">
+            {% csrf_token %}
+            <input type="text" id="email" name="userEmail" placeholder="Email" style="border:none;">
+            <input type="password" id="password" name="userPassword" placeholder="Password" style="border:none;">
+            <input type="submit" value="로그인" style="border:none;">
+        </form>
+        <a class="register-btn" href="/accounts/register">회원가입</a>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock %}

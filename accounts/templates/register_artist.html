@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %} Artist Register {% endblock %}
+{% block script %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <style>
+    </style>
+{% endblock %}
+{% block body %}
+<div style="display:flex; justify-content: center;">
+    <div class="wrapper" style="">
+        <div class="login-wrapper">
+            <h2>작가 등록</h2>
+            <form method="post" id="account-form">
+                {% csrf_token %}
+                <div class="form-control">
+                    <label for="name">이름</label>
+                    {% if name %}
+                    <input type="text" id="name" name="userName" placeholder="이름을 입력하세요" value="{{name}}">
+                    {% else %}
+                    <input type="text" id="name" name="userName" placeholder="이름을 입력하세요">
+                    {% endif %}
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <p>성별</p>
+                    {% if gender == 'M' %} <!-- 이전 선택지에 따라 달라짐 -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="userGender" id="userGenderRadio1" value="M" checked>
+                        <label class="form-check-label" for="userGenderRadio1">
+                        남자
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="userGender" id="userGenderRadio2" value="W">
+                        <label class="form-check-label" for="userGenderRadio2">
+                        여자
+                        </label>
+                    <small>Error message</small>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="userGender" id="userGenderRadio1" value="M" checked>
+                        <label class="form-check-label" for="userGenderRadio1">
+                        남자
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="userGender" id="userGenderRadio2" value="W">
+                        <label class="form-check-label" for="userGenderRadio2">
+                        여자
+                        </label>
+                    <small>Error message</small>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-control">
+                    <label for="birth">생년월일</label>
+                    {% if birth %}
+                    <input type="date" value="{{ birth }}" min="1901-01-01" max="2021-12-31" id="birth" name="userBirth">
+                    {% else %}
+                    <input type="date" value="2000-01-01" min="1901-01-01" max="2021-12-31" id="birth" name="userBirth">
+                    {% endif %}
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="email">이메일</label>
+                    {% if email %}
+                    <input type="text" id="email" name="userEmail" placeholder="이메일을 입력하세요" value="{{ email }}">
+                    {% else %}
+                    <input type="text" id="email" name="userEmail" placeholder="이메일을 입력하세요">
+                    {% endif %}
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="phoneNumber">연락처</label>
+                    {% if phonenumber %}
+                    <input type="text" id="phoneNumber" name="userPhoneNumber" maxlength="13" placeholder="핸드폰번호를 입력하세요" value="{{ phonenumber }}">
+                    {% else %}
+                    <input type="text" id="phoneNumber" name="userPhoneNumber" maxlength="13" placeholder="핸드폰번호를 입력하세요">
+                    {% endif %}
+
+                    <small>Error message</small>
+                </div>
+                <input type="submit" id="submit_btn" value="회원가입" data-name="fail" data-email="fail" data-phonenumber="fail">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/register_artist.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'artistcenter_base.html' %}
+{% block artistcenter_script %}
+{% load static %}
+<style>
+
+</style>
+{% endblock %}
+{% block content %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>이름</th>
+                <td>
+                    {{ artist.name }}
+                </td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td>
+                  {{ artist.get_gender_display }}
+                </td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td>
+                    {{ artist.birth_date }}
+                </td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>
+                    {{ artist.email }}
+                </td>
+            </tr>
+            <tr>
+                <th>연락처</th>
+                <td>
+                    {{ artist.phone_number }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

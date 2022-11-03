@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+{% block script %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+{% endblock %}
+{% block body %}
+<div class="register-structure">
+    <div class="wrapper">
+        <div class="login-wrapper">
+            <h2>회원가입</h2>
+            <form method="post" id="account-form">
+                {% csrf_token %}
+                <div class="form-control">
+                    <label for="nickname">닉네임</label>
+                    {% if nickname %}
+                    <input type="text" id="nickname" name="userNickname" placeholder="닉네임을 입력하세요" value="{{ nickname }}">
+                    {% else %}
+                    <input type="text" id="nickname" name="userNickname" placeholder="닉네임을 입력하세요">
+                    {% endif %}
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="email">이메일</label>
+                    {% if email %}
+                    <input type="text" id="email" name="userEmail" placeholder="이메일을 입력하세요" value="{{ email }}">
+                    {% else %}
+                    <input type="text" id="email" name="userEmail" placeholder="이메일을 입력하세요">
+                    {% endif %}
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="userPassword" placeholder="비밀번호를 입력하세요">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password2">비밀번호 확인</label>
+                    <input type="password" id="password2" placeholder="비밀번호를 다시 입력하세요.">
+                    <small>Error message</small>
+                </div>
+                <input type="submit" id="submit_btn" value="회원가입" data-email="fail" data-nickname="fail" data-password="fail" data-password2="fail">
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'artistcenter_base.html' %}
+{% block artistcenter_script %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/exhibit_list.css' %}">
+{% endblock %}
+{% block content %}
+<div>
+    <button type="button" class="btn hover1" id="rate_button" data-bs-toggle="modal" data-bs-target="#Modal" >
+        전시 등록하기
+    </button>
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"  style="width:100%;">
+            <div class="modal-content">
+                <div style="text-align: center;">
+                    <h3>전시 등록</h3>
+                </div>
+                <form method="POST" id="exhibit-form">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="exhibitTitle" class="col-form-label">제목:</label>
+                            <textarea class="form-control" id="exhibitTitle" onkeyup="counter(this, 64)" name="artTitle"></textarea>
+                            <span style="color:#aaa; float:right; color:black;" id="counter">(0 / 최대 64자)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="startDate" class="col-form-label">시작일:</label>
+                            <input type="datetime-local" id="startDate" name="startDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="col-form-label">종료일:</label>
+                            <input type="datetime-local" id="endDate" name="endDate" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">전시 그림 고르기:</label>
+                            <div class="check-multiple">
+                                {% if products %}
+                                {% for product in products %}
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="selectData" value="{{product.id}}">{{ product.title }}
+                                  </label>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <input type="submit" class="btn btn-primary" value="저장">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-form">
+    <table class="table" id="table">
+        <tr>
+            <th>전시 제목</th>
+            <th>시작일</th>
+            <th>종료일</th>
+            <th>전시 목록</th>
+        </tr>
+        {% for exhibit in exhibits %}
+            <tr>
+                <td>{{ exhibit.exhibit_title }}</td>
+                <td>{{ exhibit.start_date | date:'Y-m-d H:i' }}</td>
+                <td>{{ exhibit.end_date | date:'Y-m-d H:i' }}</td>
+                <td>{% for product in products %}
+                        {{ product.title }},
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<script type="text/javascript" src="{% static 'js/exhibit_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/str_counter.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+.div-header{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding:10pt;
+}
+.card-list{
+    padding:20pt;
+}
+.card {
+	height: 400px;
+	width: 350px;
+	border-radius: 15px;
+	display: inline-block;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow: hidden;
+}
+/* 카드 사진 */
+.card-header {
+    transition: 0.5s;
+	width: 100%;
+	height: 270px;
+	border-radius: 15px 15px 0 0;
+	background-size: 100% 280px;
+	background-repeat: no-repeat;
+}
+
+.card:hover .card-header {
+	opacity: 0.8;
+	height: 100px;
+	-webkit-box-orient:none;
+	-webkit-line-clamp: none;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.card-body-description ul li{
+	line-style:none;
+	font-size: 22px;
+    font-weight: bold;
+    margin-left: -20pt;
+}
+
+/* 카드 내용 */
+.card-body-description{
+	line-height: 25px;
+	margin: 10px 20px 0px 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.card:hover .card-body-description {
+    opacity: 1;
+    -webkit-transition: .7s ease-in-out;
+    display: flex; /* 숨긴 내용 다시 보이기 */
+}
+
+.card-body-footer {
+    position: absolute;
+ 	margin-top: 15px;
+ 	margin-bottom: 6px;
+    bottom: 0;
+    width: 314px;
+    font-size: 14px;
+    color: #9FA5A8;
+    padding: 0 15px;
+}
+
+.price-size {
+	float: right;
+}
+
+.artist{
+    float:left;
+}
+
+.card-body-footer hr{
+    margin-bottom: 8px;
+    opacity: 0.5;
+    border-color: #EF5A31;
+}
+
+.btn {
+    display: inline-block;
+    width:200px;
+    height:40px;
+    border:1px #D9E2FF solid;;
+    /* margin:0 auto; */
+    background-color:#D9E2FF;
+    text-align:center;
+    cursor: pointer;
+    color:#333;
+    transition:all 0.9s, color 0.3;
+}
+
+.btn:hover{
+    color:#fff;
+    background-color:#3B67FF;
+}
+.btn:hover{
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset;
+}
+

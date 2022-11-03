@@ -1,0 +1,42 @@
+.check-multiple {
+  height: 100pt;
+  width: 100%;
+  overflow-x: scroll;
+  border: 1px solid gray;
+}
+
+.check-multiple label{
+    font-size:15pt;
+}
+.form-check-input{
+    width:20pt;
+    height:20pt;
+}
+
+.col-form-label{
+    font-size:15pt;
+}
+.btn {
+    display: inline-block;
+    width:200px;
+    height:40px;
+    border:1px #D9E2FF solid;;
+    margin:0 auto;
+    background-color:#D9E2FF;
+    text-align:center;
+    cursor: pointer;
+    color:#333;
+    transition:all 0.9s, color 0.3;
+}
+.btn:hover{
+    color:#fff;
+    background-color:#3B67FF;
+}
+.btn:hover{
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset;
+}
+.table-form{
+    min-width:650px;
+    padding:10px;
+    margin:0 auto;
+}

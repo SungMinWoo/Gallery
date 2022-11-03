@@ -1,0 +1,28 @@
+<div class="card-list">
+	{% load humanize %}
+    {% if products %}
+    {% for product in products %}
+    <div class="card">
+        {% if product.photo %}
+		<div class="card-header" style='background-image: url("{{ product.photo.url }}");'>
+            {% else %}
+            <div class="card-header" style='background-image: url("../../static/media/logo.png");'>
+                {% endif %}
+		</div>
+		<div class="card-body">
+			<div class="card-body-description">
+				<h1 class="test">{{ product.title }}</h1>
+			</div>
+			<div class="card-body-footer">
+				<hr>
+                <i class="artist">{{ product.artist.nickname }}작가님</i>
+				<i class="price-size">{{ product.price | intcomma }}원/{{ product.size }}호</i>
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% load static %}
+<script type="text/javascript" src="{% static 'js/str_counter.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/product_list.js' %}"></script>

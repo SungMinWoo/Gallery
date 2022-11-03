@@ -1,0 +1,20 @@
+.form-select{
+    width: 100pt;
+    float:left;
+}
+.form-control{
+    width: 200pt;
+    float:left;
+}
+
+.btn{
+    width: 50pt;
+    float:left;
+}
+
+.searchForm{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding:10pt;
+}

@@ -1,0 +1,83 @@
+{% extends 'artistcenter_base.html' %}
+{% block artistcenter_script %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="div-header">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn hover1" id="rate_button" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+      작품 제출하기
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"  style="width:100%;">
+            <div class="modal-content">
+                <div class="" style="text-align: center;">
+                    <h3 style="">작품 제출</h3>
+                </div>
+                <form method="POST" id="product-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="artTitle" class="col-form-label" style="font-size:15pt;">제목:</label>
+                            <textarea class="form-control" id="artTitle" onkeyup="counter(this, 64)" name="artTitle"></textarea>
+                            <span style="color:#aaa; float:right; color:black;" id="counter">(0 / 최대 64자)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="artPrice" class="col-form-label" style="font-size:15pt;">가격(단위:원):</label>
+                            <input type="text" onchange="getNumber(this);" onkeyup="getNumber(this);" class="form-control" id="artPrice" name="artPrice">
+                        </div>
+                        <div class="mb-3">
+                            <label for="artSize" class="col-form-label" style="font-size:15pt;">호수(1호~500호):</label>
+                            <input type="number" oninput="minMaxCheck(this)" class="form-control" id="artSize" name="artSize" min="1" max="500">
+                            <input name="artImage" id="artImage" type="file" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <input type="submit" class="btn btn-primary" value="저장">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="pageStructure">
+        {% if products.has_other_pages %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if products.has_previous %}
+                        <li><a class="page-link text-primary d-inline-block" href="?page={{ products.previous_page_number }}"><<</a></li>
+                    {% else %}
+                        <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#"><<</div></li>
+                    {% endif %}
+
+                    {% for page_num in products.paginator.page_range %}
+                        {% if page_num %}
+                            {% if page_num == products.number %}
+                                <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ page_num }}</div></li>
+                            {% else %}
+                                <li><a class="page-link text-primary d-inline-block" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                            {% endif %}
+                        {% else %}
+                            <li class="disabled"><a class="page-link text-secondary d-inline-block text-muted" href="#">・・・</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if products.has_next %}
+                        <li><a class="page-link text-primary d-inline-block" href="?page={{ products.next_page_number }}">>></a></li>
+                    {% else %}
+                        <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">>></div></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+</div>
+{% include 'card_list.html' %}
+{% endblock %}
+
+<script type="text/javascript" src="{% static 'js/product_list.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/str_counter.js' %}"></script>
+

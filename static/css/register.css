@@ -1,0 +1,68 @@
+.register-structure{
+    display:flex;
+    justify-content: center;
+}
+
+:root {
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.form {
+    padding: 30px 40px;
+}
+
+.form-check-input[type=radio] {
+    border-radius: 50%;
+}
+
+.form-control:not(.form-check-input) {
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.form-control label:not(.form-check-input) {
+    color: #777;
+    display: block;
+}
+
+.form-control input:not(.form-check-input) {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-control.success input {
+    border-color: var(--success-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);
+}
+
+.form-control small {
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+    font-size: 5px;
+    padding-left: 10px;
+}
+
+#submit_btn{
+    border: none;
+}

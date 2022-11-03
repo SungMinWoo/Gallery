@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %} Product list {% endblock %}
+{% block script %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/search_form.css' %}">
+{% endblock %}
+{% block body %}
+<h1 style="">최근 등록된 작가</h1>
+<div class="searchForm">
+    <form id="search-form" method="get">
+        <select name="choice" class="form-select">
+            <option value="name">이름</option>
+            <option value="email">이메일</option>
+        </select>
+        <input id="search_box" name="search" type="search" class="form-control mr-sm-2" aria-label="Search">
+        <button id="search_btn_img" type="submit" class="btn btn-primary">
+            검색
+        </button>
+    </form>
+</div>
+<div class="card-list" style="padding:20pt;">
+{% load humanize %}
+{% if artists %}
+    {% for artist in artists %}
+    <div class="card">
+        {% if artist.photo %}
+		<div class="card-header" style='background-image: url("../../media/{{ artist.photo }}");'>
+            {% else %}
+            <div class="card-header" style='background-image: url("../../static/media/logo.png");'>
+                {% endif %}
+		</div>
+		<div class="card-body">
+			<div class="card-body-description">
+                <ul>
+                    <li>작가님: {{ artist.name }}</li>
+                    <li>성별: {{ artist.get_gender_display }}</li>
+                    <li>이메일: {{ artist.email }}</li>
+                    <li>등록일: {{ artist.joindate | date:'Y-m-d' }}</li>
+                </ul>
+			</div>
+			<div class="card-body-footer">
+				<hr>
+                <i class="artist">{{ artist.name }}작가님</i>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+{% endif %}
+</div>
+<div class="pageStructure" style="width:100%; min-width:600pt; display: flex; justify-content: center;">
+    {% if artists.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if artists.has_previous %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ artists.previous_page_number }}"><<</a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#"><<</div></li>
+                {% endif %}
+
+                {% for page_num in artists.paginator.page_range %}
+                    {% if page_num %}
+                        {% if page_num == artists.number %}
+                            <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ page_num }}</div></li>
+                        {% else %}
+                            <li><a class="page-link text-primary d-inline-block" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="disabled"><a class="page-link text-secondary d-inline-block text-muted" href="#">・・・</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if artists.has_next %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ artists.next_page_number }}">>></a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">>></div></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+.ogadminMain {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  width: 150px;
+  background: #D9E2FF;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+}
+
+.ogadminMain li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  color: #000;
+  font-weight: bold;
+}
+
+.ogadminMain li a:hover {
+  background: #0026A9;
+  color: #fff;
+}
+
+.ogadminMain li a.home {
+  background : #3B67FF;
+  color: #fff;
+}
+
+.cd1 {
+  margin-left: 120px;
+}

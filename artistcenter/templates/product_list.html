@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} Product list {% endblock %}
+{% block script %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/search_form.css' %}">
+{% endblock %}
+{% block body %}
+<h1> 최신 작품 목록 감상하기</h1>
+<div class="searchForm">
+    <form id="search-form" method="get">
+        <select name="choice" class="form-select">
+            <option value="title">제목</option>
+            <option value="price">가격</option>
+            <option value="size">호수</option>
+        </select>
+        <input id="search_box" name="search" type="search" class="form-control mr-sm-2" aria-label="Search">
+        <button id="search_btn_img" type="submit" class="btn btn-primary">
+            검색
+        </button>
+    </form>
+</div>
+{% include 'card_list.html' %}
+<div class="pageStructure" style="width:100%; min-width:600pt; display: flex; justify-content: center;">
+    {% if products.has_other_pages %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if products.has_previous %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ products.previous_page_number }}"><<</a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#"><<</div></li>
+                {% endif %}
+
+                {% for page_num in products.paginator.page_range %}
+                    {% if page_num %}
+                        {% if page_num == products.number %}
+                            <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ page_num }}</div></li>
+                        {% else %}
+                            <li><a class="page-link text-primary d-inline-block" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="disabled"><a class="page-link text-secondary d-inline-block text-muted" href="#">・・・</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if products.has_next %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ products.next_page_number }}">>></a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">>></div></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+<script type="text/javascript" src="{% static 'js/str_counter.js' %}"></script>
+{% endblock %}
+
